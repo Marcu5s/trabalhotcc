@@ -39,30 +39,61 @@ use \core\widgets\FormWidget;
 <?php
 $this->title = "ZuuF || Bem Vindo"
 ?>
-<section id="services">
+<section id="body" id="services">
     <link rel="stylesheet" href="estilo.css"/>
     <div class="furoDaFolha"></div>
     <div class="rasgadoDaFolha"></div>
-    <form action="fazAlgo" method="post">
-        <fieldset>
+    <form id="form" method="post" action="<?php echo $this->createUrl('cadastro')?>" enctype="multipart/form-data" >
+        
+        <?php
+
+                    function Script() {
+
+                        return " var Class = data.class; setTimeout(function(){ $('.checkbox').html(''); if(Class == 'success'){ location.href=data.page;  }; },3000); if(Class ==='success'){ $('.checkbox').html(data.msg); }; if(Class ==='warning' ){ $('.checkbox').html(data.msg); }  ";
+                    }
+/**
+ *  'ajax' => [
+                                    'url' => $this->createUrl('cadastro'),
+                                    'type' => 'POST',
+                                    'dataType' => 'json',
+                                    'success' => function($data) {
+                                        return Script();
+                                    },
+                                    'error' => function($data) {
+                                        
+                                    },
+                                ],
+ */
+
+                    $form = FormWidget::widget($model, [
+                                'id' => 'form',
+                               
+                    ]);
+                    ?>
+        <fieldset id="fieldset">
             <legend class="boxlegenda">Dados Pessoais:</legend>
 
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required />
-
-            <label for="cpf">cpf:</label>
-            <input type="text" id="cpf" pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}" name="cpf" required />
-            <spam class="aviso">exemplo de formato correto: 000.000.000-00</spam>
-
-            <label for="telefone">Telefone:</label>
-            <input type="tel" id="telefone" pattern="\([0-9]{2}\)[0-9]{4}\-[0-9]{4}" name="telefone" required />
-            <spam class="aviso">exemplo de formato correto: (00)0000-0000</spam>
-
+            <input type="text" id="nome" name="Usuario[nome]" />
+            
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" />
-
-            <input type="submit" value="Enviar"/>
+            <input type="text" id="email" name="Usuario[email]" />
+            
+            <label for="nome">Login:</label>
+            <input type="text" id="login" name="Usuario[login]" />
+            
+            <label for="nome">Senha:</label>
+            <input type="password" id="senha" name="Usuario[senha]" />
+            
+            <label for="nome">Foto:</label>
+            <input type="file" id="file" name="Usuario[file]" />
+            
+            
+            <input type="submit" value="Enviar">
+            
+            
         </fieldset>
+        
     </form>
     <style>
         *{	
@@ -72,26 +103,33 @@ $this->title = "ZuuF || Bem Vindo"
             box-sizing:border-box;
         }
 
-       
 
-      
+        /** 2- o box maior(filho) */
+        #body{
+            width:800px;
+            padding-left:7%;
+            padding-right:5%;
+            margin:0 auto;
 
-        /**3- Inicio da estrutura do formulario
+            background-color:#fcf9ff;
+        }
 
-        form{
+        /**3- Inicio da estrutura do formulario */
+
+        #form{
             width:100%;
             position:relative;
             padding-top:60px;
             padding-bottom:60px;
-            margin:20px;
+            margin:-80px -13px;
 
             border-left:solid 1px red;
             border-right:solid 1px red;
         }
 
         /**4- contorno do formulario*/
-        fieldset{
-            border:none;
+        #fieldset{
+            border:none; 
         }
 
         /**5- legenda do formulario(titulo)*/
@@ -112,7 +150,7 @@ $this->title = "ZuuF || Bem Vindo"
             margin-top:45px;
             height:45px;
 
-            font-size:2.5em;
+            font-size:2em;
 
             border-top:solid 1px lightblue;
             border-bottom:solid 1px lightblue;
@@ -123,7 +161,7 @@ $this->title = "ZuuF || Bem Vindo"
             width:100%;
             height:45px;
 
-            font-size:2.5em;
+            font-size:1.5em;
 
             border-bottom:solid 1px lightblue;	
             outline:none;
@@ -180,49 +218,7 @@ $this->title = "ZuuF || Bem Vindo"
 
 
 
-        /**desenho do lado da folha*/
-        .furoDaFolha{
-            width:40px;
-            height:40px;
-            margin:22px 0 5px -70px;
-            position:absolute;
-
-            border-radius:50%;
-
-            background-color:#130d06;
-
-            box-shadow:
-                0 75px 0 #130d06,
-                0 150px 0 #130d06,
-                0 225px 0 #130d06,
-                0 300px 0 #130d06,
-                0 375px 0 #130d06,
-                0 450px 0 #130d06,
-                0 525px 0 #130d06,
-                0 600px 0 #130d06,
-                0 675px 0 #130d06;
-        }
-        .rasgadoDaFolha{
-            width:60px;
-            height:22px;
-            margin:32px 0 5px -115px;
-            position:absolute;
-
-            border-radius:0 15% 15% 0;
-
-            background-color:#130d06;
-
-            box-shadow:
-                0 75px 0 #130d06,
-                0 150px 0 #130d06,
-                0 225px 0 #130d06,
-                0 300px 0 #130d06,
-                0 375px 0 #130d06,
-                0 450px 0 #130d06,
-                0 525px 0 #130d06,
-                0 600px 0 #130d06,
-                0 675px 0 #130d06;
-        }
+        
     </style>
 
 </section>

@@ -118,7 +118,7 @@
 
     <!-- Contact Form JavaScript -->
     <script src="<?php echo $this->assets($theme)?>/js/jqBootstrapValidation.js"></script>
-    <script src="<?php echo $this->assets($theme)?>/js/contact_me.js"></script>
+    
 
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo $this->assets($theme)?>/js/agency.js"></script>

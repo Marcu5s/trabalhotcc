@@ -55,46 +55,32 @@ class LoginController extends \core\app\Controller{
     public function setSession($objct){
      
      
-    // $insert  = ['ip'=>$_SERVER['REMOTE_ADDR'],'browser'=>$_SERVER['HTTP_USER_AGENT'],'usuario'=>$array['user_id']];
-     
-    // $idLog = $this->logSistema->getLastId($this->logSistema->insert($insert,null,false));
-     
-    Session::setSession([
+      
+   Session::setSession([
      'nome'      =>  $objct->nome,
      'login'     =>  $objct->login,
      'id'        =>  $objct->id,
      'file'      =>  '/',
      'email'     =>  $objct->email,
+     'photo'     => $objct->file,
     ]);
-          
+ 
+        
     //$_SESSION['idLog']     =  $idLog;
           
     parent::Json([
-        'msg'=>'Aguarde...','success'=>1,'class'=>'success','page'=>$this->createUrl('painel'),
+        'msg'=>'Aguarde...',
+        'success'=>1,
+        'class'=>'success',
+        'page'=>$this->createUrl('painel'),
+        'file'=> $this->createUrl().'/app/assets/arquivos/profile/'.$objct->file,
     ]);
      
  }
     
     
-public function actionLogout(){
+
     
-    $url = end($this->server());
-        
-    $logSistema = new LogSistema();
-    
-    if($url == 'logout'){
-        
-    $date = date('Y-m-d H:i:s');
-      
-    $update = ['saida'=>$date];
-     
-    $logSistema->setUpdate($update, $_SESSION['idLog']);
-        
-    session_destroy();
-    Controller::location($this->createUrl());
-    
-  }
-    
-  }   
+   
     
 }

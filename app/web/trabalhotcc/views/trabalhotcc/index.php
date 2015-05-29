@@ -44,7 +44,7 @@ $this->title = "ZuuF || Bem Vindo"
         <div class="login-container">
             <div id="output"></div>
             <style>
-                body{background: #eee url(http://subtlepatterns.com/patterns/sativa.png);}
+                #body{background: #eee url(http://subtlepatterns.com/patterns/sativa.png);}
                 html,body{
                     position: relative;
                     height: 100%;
@@ -181,14 +181,16 @@ $this->title = "ZuuF || Bem Vindo"
                     animation-name: fadeInUp;
                 }
             </style>
-            <div class="avatar"></div>
+            <div class="avatar">
+                 
+            </div>
             <div class="form-box">
                 <form id="Validade" class="form-horizontal" action="" method="post">
                     <?php
 
                     function Script() {
 
-                        return " var Class = data.class; setTimeout(function(){ $('.checkbox').html(''); if(Class == 'success'){ location.href=data.page;  }; },3000); if(Class ==='success'){ $('.checkbox').html(data.msg); }; if(Class ==='warning' ){ $('.checkbox').html(data.msg); }  ";
+                        return "var Class = data.class; setTimeout(function(){ $('.checkbox').html(''); if(Class == 'success'){  location.href=data.page;  };  },3000); if(Class ==='success'){  $('.avatar').css({'background-image':'url('+data.file+')'});  $('.checkbox').html(data.msg); }; if(Class ==='warning' ){ $('.checkbox').html(data.msg); }  ";
                     }
 
                     $form = FormWidget::widget($model, [
@@ -228,10 +230,11 @@ $this->title = "ZuuF || Bem Vindo"
                         <div class="button-login">	
                             <button type="submit" class="btn btn-primary"><font><font>Entrar</font></font></button>
                         </div>
-                        </br> <button type="button" href="Cadastro" class="btn btn-primary"><font><font>Cadastro</font></font></button>
+                        </br> <a  href="<?php echo $this->createUrl("cadastro");?>" class="btn btn-primary" ><font><font>Cadastro</font></font></a>
                         <div class="clearfix"></div>
 
                         <hr>
+                        <span class="checkbox"></span>
                     </fieldset>
                 </form>
 

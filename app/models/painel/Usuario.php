@@ -22,7 +22,7 @@ class Usuario extends \ActiveRecord\Model {
             ['email','email','required','message'=>'Obrigatório','error'=>'Email inválido'],
              #['id', 'integer', 'required', 'message' => 'Obrigatório', 'error' => 'Somente número inteiros'],
             #['email', 'email', 'required', 'message' => 'Obrigatório', 'error' => 'E-mail inválido'],
-            #['foto', 'file', 'required','extension'=>"pdf|png|jpg", 'message' => 'Obrigatório', 'error' => 'Somente pdf, png, jpg'],
+            ['file', 'file','extension'=>"png|jpg", 'message' => 'Obrigatório', 'error' => 'Somente pdf, png, jpg'],
         ];
     }
 

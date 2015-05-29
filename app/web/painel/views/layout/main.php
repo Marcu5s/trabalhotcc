@@ -1,3 +1,8 @@
+<?php
+
+$img = $this->createUrl().'/app/assets/arquivos/profile/'.Kanda::$app->session->getSession()->photo;
+$nome = Kanda::$app->session->getSession()->nome;  
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,15 +58,15 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="<?php echo $this->assets($theme) ?>dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                                    <span class="hidden-xs">Alexander Pierce</span>
+                                    <img src="<?php echo $img ?>" class="user-image" alt="User Image"/>
+                                    <span class="hidden-xs"><?php echo $nome?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="<?php echo $this->assets($theme) ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                        <img src="<?php echo $img ?>" class="img-circle" alt="User Image" />
                                         <p>
-                                            Alexander Pierce - Web Developer
+                                            <?php echo $nome?> 
                                             <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
@@ -89,10 +94,10 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="<?php echo $this->assets($theme) ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                            <img src="<?php echo $img ?>" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Alexander Pierce</p>
+                            <p><?php echo $nome?></p>
                         </div>
                     </div>
                     <!-- search form -->

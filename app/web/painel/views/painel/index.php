@@ -18,35 +18,23 @@ print_r($_POST);
     </section>
     <!-- Main content -->
     <section class="content">
-        <div class='box-body pad'>
-            <script type="text/javascript" src="/vendor/tinymce/tinymce.min.js"></script>
-
-            <script type="text/javascript">
-                $(function () {
-                    tinymce.init({selector: 'textarea', theme: "modern",
-                        width: 300,
-                        height: 300,
-                        plugins: [
-                            "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
-                            "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                            "save table contextmenu directionality emoticons template paste textcolor"]});
 
 
-
-
-
-                }
-
-            </script> 
-
-            <form method="post" action="">
-                <textarea>
-              
+        <script type="text/javascript" src="/var/www/dev.trabalhotcc.com.br/app/vendors/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+        <script type="text/javascript">
+            tinymce.init({
+                // General options
+                selector: 'textarea'
+            });
+        </script>
+        <form>
+            <textarea >
+              Teste
                   
 
-                </textarea>
-            </form>
+            </textarea>
 
-
+            <input type="submit" value="Enviar">
+        </form>
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->

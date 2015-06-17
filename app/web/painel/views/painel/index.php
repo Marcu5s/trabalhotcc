@@ -21,11 +21,7 @@ print_r($_POST);
  
         <form>
             <textarea >
-              Teste
-                  
-
             </textarea>
-
             <input type="submit" value="Enviar">
         </form>
     </section><!-- /.content -->

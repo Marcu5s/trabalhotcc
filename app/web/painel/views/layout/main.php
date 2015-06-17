@@ -144,9 +144,7 @@ $nome = Kanda::$app->session->getSession()->nome;
             <?php
             echo $content;
             ?>
-
-
-
+ 
             <footer class="main-footer">
                 <div class="pull-right hidden-xs">
                     <b>Version</b> 2.0
@@ -163,6 +161,8 @@ $nome = Kanda::$app->session->getSession()->nome;
         <script>
             $.widget.bridge('uibutton', $.ui.button);
         </script>
+        
+        
         <!-- Bootstrap 3.3.2 JS -->
         <script src="<?php echo $this->assets($theme) ?>bootstrap/js/bootstrap.min.js" type="text/javascript"></script>    
         <!-- Morris.js charts -->
@@ -195,5 +195,6 @@ $nome = Kanda::$app->session->getSession()->nome;
 
         <!-- AdminLTE for demo purposes -->
         <script src="<?php echo $this->assets($theme) ?>dist/js/demo.js" type="text/javascript"></script>
+     
     </body>
 </html>

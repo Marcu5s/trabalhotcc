@@ -18,15 +18,7 @@ print_r($_POST);
     </section>
     <!-- Main content -->
     <section class="content">
-
-
-        <script type="text/javascript" src="/var/www/dev.trabalhotcc.com.br/app/vendors/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
-        <script type="text/javascript">
-            tinymce.init({
-                // General options
-                selector: 'textarea'
-            });
-        </script>
+ 
         <form>
             <textarea >
               Teste
@@ -38,3 +30,11 @@ print_r($_POST);
         </form>
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
+
+<script type="text/javascript" src="<?php echo $this->createUrl() ?>/app/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
+        <script type="text/javascript">
+             tinymce.init({
+                // General options
+                selector: 'textarea'
+            });
+ </script>

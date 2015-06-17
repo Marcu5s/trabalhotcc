@@ -3,7 +3,7 @@
 return $main = [
 
     'db' => [
-        'dsn' => 'mysql://root:linux321@localhost/trabalhotcc',
+        'dsn' => 'mysql://root:254700@localhost/trabalhotcc',
     ],
     'app' => [
         'model'    => '/app/models/',

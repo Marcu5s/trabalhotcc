@@ -25,7 +25,7 @@ class Session {
 
         if (!empty($session)) {
             $this->_setSession = (object) $session;
-            return $this->_setSession;
+            return (object) $this->_setSession;
         }
     }
 
@@ -51,7 +51,7 @@ class Session {
         elseif(!empty($_SESSION))
             return (object) $_SESSION;
         else
-            return $_SESSION;
+            return (object) $_SESSION;
     }
 
     public static function clear($key = '') {

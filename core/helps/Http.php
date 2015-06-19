@@ -17,45 +17,81 @@ class Http {
      */
     public static function post($model) {
 
-        
-       if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        
 
-        $className = explode("\\", get_class($model));
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $className = end($className);
 
-        $arrays = [];
+            $className = explode("\\", get_class($model));
 
-        if (method_exists($model, 'rules')) {
+            $className = end($className);
 
-            $param = [];
+            $arrays = [];
 
-            if (isset($_POST[$className]) && !empty($_POST[$className])) {
+            if (method_exists($model, 'rules')) {
 
-                $rules = self::getRules($model::rules());
+                $param = [];
 
-                foreach ($rules as $key => $rule) {
+                if (isset($_POST[$className]) && !empty($_POST[$className])) {
 
-                    if (isset($_POST[$className][$rule])) {
-                        $param[$rule] = $_POST[$className][$rule];
-                        unset($_POST[$className][$rule]);
+                    $rules = self::getRules($model::rules());
+
+
+                    foreach ($rules as $key => $rule) {
+
+                        if (isset($_POST[$className][$rule])) {
+                            /**
+                             * Carregando os valores 
+                             */
+                            $model->$rule = $_POST[$className][$rule];
+                            unset($_POST[$className][$rule]);
+                        }
                     }
+                    $_POST[$className];
+                    return $model;
                 }
-                if (count($_POST[$className]) > 0) {
-
-                    foreach ($_POST[$className] as $clear => $value)
-                        unset($_POST[$className][$clear]);
-                }
-                unset($_POST[$className]);
-                $_POST = $param;
-
-                return true;
-            } 
+            }
         }
-       }  
     }
 
+    
+    public static function get($model) {
+
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+
+            $className = explode("\\", get_class($model));
+
+            $className = end($className);
+
+            $arrays = [];
+
+            if (method_exists($model, 'rules')) {
+
+                $param = [];
+
+                if (isset($_GET[$className]) && !empty($_GET[$className])) {
+
+                    $rules = self::getRules($model::rules());
+
+
+                    foreach ($rules as $key => $rule) {
+
+                        if (isset($_GET[$className][$rule])) {
+                            /**
+                             * Carregando os valores 
+                             */
+                            $model->$rule = $_POST[$className][$rule];
+                            unset($_GET[$className][$rule]);
+                        }
+                    }
+                    $_GET[$className];
+                    return $model;
+                }
+            }
+        }
+    }
+    
     public static function getRules($rules) {
 
         $rule = [];

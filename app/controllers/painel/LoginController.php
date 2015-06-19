@@ -19,8 +19,8 @@ class LoginController extends \core\app\Controller{
         if(\Kanda::$post->post($model)){
                       
                        
-        $login    = $_POST['login'];
-        $password = $_POST['senha'];
+        $login    = $model->login;
+        $password = $model->senha;
         
         
         $user = Usuario::find('first',['login'=>$login]);
@@ -77,10 +77,5 @@ class LoginController extends \core\app\Controller{
     ]);
      
  }
-    
-    
-
-    
    
-    
 }

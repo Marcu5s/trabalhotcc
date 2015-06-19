@@ -1,8 +1,12 @@
-<?php $this->title = "Zuuf | DashBoard" ?>
-
 <?php
-print_r($_POST);
-?>
+
+$this->title = "Zuuf | DashBoard";
+
+use core\widgets\FormWidget;
+use core\helps\Session;       
+use core\helps\Url;       
+        
+?> 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -19,10 +23,16 @@ print_r($_POST);
     <!-- Main content -->
     <section class="content">
  
-        <form>
-            <textarea >
-            </textarea>
-            <input type="submit" value="Enviar">
+        <form method="POST" action="<?php echo Url::home('post/create') ?>">
+            <?php
+             $form = FormWidget::widget($post);
+             
+             echo $form->textareaFildGroup('post');
+             
+             echo $form->textFieldGroup('usuario_id',[''],'hidden');
+             
+            ?>
+            <button class="btn btn-success" type="submit">Enviar</button>
         </form>
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->

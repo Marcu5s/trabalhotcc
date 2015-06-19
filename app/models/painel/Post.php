@@ -9,27 +9,23 @@
 
 namespace app\models\painel;
 
-class Usuario extends \ActiveRecord\Model {
+class Post extends \ActiveRecord\Model {
 
     static $table_name = 'post';
    
-    public $confirm_senha;
+    static $primary_key = 'id';
 
     public static function rules() {
 
         return [
-            [['id_user','post'],'required'],
-            #['email','email','required','message'=>'Obrigatório','error'=>'Email inválido'],
-             #['id', 'integer', 'required', 'message' => 'Obrigatório', 'error' => 'Somente número inteiros'],
-            #['email', 'email', 'required', 'message' => 'Obrigatório', 'error' => 'E-mail inválido'],
-            #['file', 'file','extension'=>"png|jpg", 'message' => 'Obrigatório', 'error' => 'Somente pdf, png, jpg'],
+            [['usuario_id','post'],'required'], 
         ];
     }
 
     public static function attributeLabels() {
 
         return [
-            'id_user' => 'Codigo',
+            'usuario_id' => '',
             'post' => 'Post',
            
              

@@ -9,8 +9,11 @@
 
 namespace app\controllers\painel;
 
-use app\models\painel\Usuario;
 use core\helps\Session;
+
+
+use app\models\painel\Usuario;
+use app\models\painel\Post;
 
 class PainelController extends \core\app\Controller {
 
@@ -21,7 +24,15 @@ class PainelController extends \core\app\Controller {
             $this->render('login',['model'=>new Usuario()]);
             
         } else {
-            return $this->render('index',['usuarios'=>  Usuario::count()]);
+            
+            $post = new Post();
+            $post->usuario_id = Session::getSession()->id;
+            
+            return $this->render('index',
+            [
+                'usuarios'=>  Usuario::count(),
+                'post'=>$post
+            ]);
         }
     }
 

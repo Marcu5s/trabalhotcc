@@ -17,8 +17,7 @@ use core\vendor\wideImage\WideImage;
 class TrabalhotccController extends \core\app\Controller {
 
     public function actionIndex() {
-        Session::getSession()->id;
-           
+        
             return $this->render('index',['model'=>new Usuario()]);
         
     }
@@ -30,9 +29,9 @@ class TrabalhotccController extends \core\app\Controller {
         if(\Kanda::$post->post($model)){
             
             
-            $file = UploadFile::load($model, 'file');
-            
-            $widimage = WideImage::load($file->tmpName);
+           $file = UploadFile::load($model, 'file');
+                      
+           $widimage = WideImage::load($file->tmpName);
             
            $resize = $widimage->resize(255,255);
                       
@@ -40,12 +39,11 @@ class TrabalhotccController extends \core\app\Controller {
            $resize->saveToFile($filename);
            
            chmod($filename,0777);
-           
-           $_POST['senha'] = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-           $_POST['file']  =  $file->name; 
-           $model = Usuario::create($_POST);
-           
-           if($model)
+             
+           $model->senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+           $model->file  = $file->name; 
+                      
+           if($model->save())
               $this->Json([
             'class'=>'sucess',
             'msg'=>'Cadastrado com Sucesso',            

@@ -17,6 +17,7 @@ use core\vendor\wideImage\WideImage;
 class TrabalhotccController extends \core\app\Controller {
 
     public function actionIndex() {
+        Session::getSession()->id;
            
             return $this->render('index',['model'=>new Usuario()]);
         

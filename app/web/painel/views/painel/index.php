@@ -30,7 +30,8 @@ print_r($_POST);
 <script type="text/javascript" src="<?php echo $this->createUrl() ?>/app/vendors/tinymce/js/tinymce/tinymce.min.js"></script>
         <script type="text/javascript">
              tinymce.init({
-                // General options
-                selector: 'textarea'
+               
+        
+            selector: 'textarea'
             });
  </script>

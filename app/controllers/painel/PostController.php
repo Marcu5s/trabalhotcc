@@ -21,7 +21,7 @@ class PostController extends \core\app\Controller {
         
         if(\Kanda::$post->post($model) && $model->save()){
             
-            
+            echo "Certo";
             
         }else{
             echo 'erro para cadastrar'; 

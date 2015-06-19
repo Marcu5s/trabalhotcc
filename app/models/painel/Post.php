@@ -18,7 +18,7 @@ class Post extends \ActiveRecord\Model {
     public static function rules() {
 
         return [
-            [['usuario_id','post'],'required'], 
+            [['usuario_id','post','titulo'],'required'], 
         ];
     }
 
@@ -26,7 +26,8 @@ class Post extends \ActiveRecord\Model {
 
         return [
             'usuario_id' => '',
-            'post' => 'Post',
+            'post' => 'Descrição',
+            'titulo' => 'Titulo'
            
              
         ];

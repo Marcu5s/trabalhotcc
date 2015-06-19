@@ -13,7 +13,17 @@ use app\models\painel\Post;
 use core\helps\Session;
 
 
-class PostController extends \core\app\Controller {
+class PostsController extends \core\app\Controller {
+
+
+    public function actionIndex(){
+
+    	return $this->render('index',
+    		[
+    			'usuario_id'=>Session::getSession()->id
+    		]);
+ 
+    }
 
     public function actionCreate() {
  

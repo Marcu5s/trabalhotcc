@@ -28,16 +28,16 @@ use \core\widgets\FormWidget;
 <header>
     <div class="container">
         <div class="intro-text">
-            <div class="intro-lead-in">Slogan</div>
+            <div class="intro-lead-in">Daily Virtual</div>
             <div class="intro-heading">LOGO</div>
-            <a href="/trabalhotcc" class="page-scroll btn btn-xl">Entrar</a>
+            <a href="#services" class="page-scroll btn btn-xl">Cadastrar</a>
         </div>
     </div>
 </header>
 
 <!-- Services Section -->
 <?php
-$this->title = "ZuuF || Bem Vindo"
+$this->title = "Daily Virtual || Bem Vindo"
 ?>
 <section id="body" id="services">
     <link rel="stylesheet" href="estilo.css"/>

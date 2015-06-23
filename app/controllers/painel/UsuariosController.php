@@ -71,7 +71,7 @@ class UsuariosController extends \core\app\Controller {
 
                 unset($_POST['confirm_senha']);
             } else {
-                \Kanda::$app->session->setflash('update', 'Senha inválida', 'warning');
+                    \Kanda::$app->session->setflash('update', 'Senha inválida', 'warning');
 
                 return $this->redirect('create');
             }

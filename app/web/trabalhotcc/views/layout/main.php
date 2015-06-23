@@ -10,7 +10,8 @@
     <meta name="author" content="">
 
     <title> <?php echo $this->title ?> </title>
-
+    <link rel="icon" type="image/png" href="<?php echo $this->assets($theme) ?>icone.png" /> 
+        
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo $this->assets($theme)?>/css/bootstrap.min.css" rel="stylesheet">
 
@@ -46,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">LOGO</a>
+                <a class="navbar-brand page-scroll" href="#page-top">Daily Virtual</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -56,7 +57,10 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Entrar</a>
+                        <a class="page-scroll" href="#cadastrar">Cadastrar</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#entrar">Entrar</a>
                     </li>
                    
                 </ul>

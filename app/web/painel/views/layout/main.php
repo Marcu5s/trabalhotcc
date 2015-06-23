@@ -10,6 +10,7 @@ $nome = Kanda::$app->session->getSession()->nome;
         <title><?php echo $this->title ?>   </title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- Bootstrap 3.32 -->
+        <link rel="icon" type="image/png" href="<?php echo $this->assets($theme) ?>icone.png" /> 
         <link href="<?php echo $this->assets($theme) ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
         <!-- FontAwesome 4.3.0 -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -101,21 +102,14 @@ $nome = Kanda::$app->session->getSession()->nome;
                         </div>
                     </div>
                     <!-- search form -->
-                    <form action="#" method="get" class="sidebar-form">
-                        <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                            <span class="input-group-btn">
-                                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                            </span>
-                        </div>
-                    </form>
+                    
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="header">MAIN NAVIGATION</li>
+                        <li class="header"></li>
                         <li class="active treeview">
                             <a href="/painel">
-                                <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
+                                <i class="fa fa-dashboard"></i> <span>Estante</span> 
                             </a>
 
                         </li>
@@ -124,15 +118,12 @@ $nome = Kanda::$app->session->getSession()->nome;
                       
                         <li class="active treeview">
                             <a href="/painel/posts">
-                                <i class="fa fa-book"></i> <span>Posts</span> 
+                                <i class="fa fa-book"></i> <span>Seu Diario</span> 
                             </a>
 
                         </li>
                         
-                        <li class="active treeview">
-                            <a href="/painel/compartilhados">
-                                <i class="fa fa-globe"></i> <span>Compartilhados</span> 
-                            </a>
+                        
 
                         </li>
                         
@@ -147,10 +138,7 @@ $nome = Kanda::$app->session->getSession()->nome;
         <h1>
             <?php echo $this->title ?>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
-        </ol>
+        
     </section>
     <!-- Main content -->
     <section class="content">

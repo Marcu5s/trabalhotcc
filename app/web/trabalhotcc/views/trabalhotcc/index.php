@@ -456,11 +456,8 @@ $this->title = "Daily Virtual || Bem Vindo"
                         <input class="input-large span10" name="Usuario[file]" id="username" type="file" placeholder="informe seu login">
                     </div>
                     <div class="clearfix"></div>
-
-<!--<label class="remember" for="remember"><input type="checkbox" id="remember"><font><font>Lembre de mim</font></font></label>-->
-                    </br>
-
-                    </br> <a  type="submit"  class="btn btn-primary" ><font><font>Cadastro</font></font></a>
+                   </br> 
+                    <button class="btn btn-primary" type="submit">Castro</button>
                     <div class="clearfix"></div>
 
                     <hr>

@@ -28,9 +28,10 @@ use \core\widgets\FormWidget;
 <header>
     <div class="container">
         <div class="intro-text">
-            <div class="intro-lead-in">Daily Virtual</div>
-            <div class="intro-heading">Logo</div>
-            <a href="/trabalhotcc" class="page-scroll btn btn-xl">Entrar</a>
+            <div class="intro-lead-in"> </div>
+            <div class="intro-heading"> </div>
+
+            <a href="#entrar" class="page-scroll btn btn-xl">Entrar</a>
         </div>
     </div>
 </header>
@@ -250,7 +251,7 @@ $this->title = "Daily Virtual || Bem Vindo"
     <link rel="stylesheet" href="estilo.css"/>
     <div class="form-box">
 
-        <form id="form" method="post" action="<?php echo $this->createUrl('cadastro') ?>" enctype="multipart/form-data" >
+        <form id="form" method="post" action="" enctype="multipart/form-data" >
 
             <?php
 
@@ -259,21 +260,19 @@ $this->title = "Daily Virtual || Bem Vindo"
                 return " var Class = data.class; setTimeout(function(){ $('.checkbox').html(''); if(Class == 'success'){ location.href=data.page;  }; },3000); if(Class ==='success'){ $('.checkbox').html(data.msg); }; if(Class ==='warning' ){ $('.checkbox').html(data.msg); }  ";
             }
 
-            /**
-             *  'ajax' => [
-              'url' => $this->createUrl('cadastro'),
-              'type' => 'POST',
-              'dataType' => 'json',
-              'success' => function($data) {
-              return Script();
-              },
-              'error' => function($data) {
-
-              },
-              ],
-             */
             $form = FormWidget::widget($model, [
                         'id' => 'form',
+                        'ajax' => [
+                            'url' => $this->createUrl('cadastro'),
+                            'type' => 'POST',
+                            'dataType' => 'json',
+                            'success' => function($data) {
+                                return Script();
+                            },
+                            'error' => function($data) {
+                                
+                            },
+                        ],
             ]);
             ?>
 
@@ -461,7 +460,7 @@ $this->title = "Daily Virtual || Bem Vindo"
 <!--<label class="remember" for="remember"><input type="checkbox" id="remember"><font><font>Lembre de mim</font></font></label>-->
                     </br>
 
-                    </br> <a  type="submit" class="btn btn-primary" ><font><font>Cadastro</font></font></a>
+                    </br> <a  type="submit"  class="btn btn-primary" ><font><font>Cadastro</font></font></a>
                     <div class="clearfix"></div>
 
                     <hr>

@@ -17,50 +17,77 @@ use core\vendor\wideImage\WideImage;
 class TrabalhotccController extends \core\app\Controller {
 
     public function actionIndex() {
-        
-            return $this->render('index',['model'=>new Usuario()]);
-        
+
+        return $this->render('index', ['model' => new Usuario()]);
     }
-    
-    public function actionCadastro(){
-        
+
+    public function actionRecuperar() {
+
+        return $this->render('recuperar', ['model' => new Usuario()]);
+    }
+
+    public function actionCodigo() {
+
+        return $this->render('codigo', ['model' => new Usuario()]);
+    }
+
+    public function actionSenha() {
+
+        return $this->render('senha', ['model' => new Usuario()]);
+    }
+
+    public function actionCadastro() {
+
         $model = new Usuario();
         
-        if(\Kanda::$post->post($model)){
-            
-            
-           $file = UploadFile::load($model, 'file');
-           
-           if(!empty($file)){           
+           $login    = $model->login;
+        
+        $user = Usuario::find('first', ['login' => $login]);
+      
+        if ($user == $login) {
+            if (\Kanda::$post->post($model)) {
 
-           $widimage = WideImage::load($file->tmpName);
-           
-           $model->file  = $file->name; 
 
-           $resize = $widimage->resize(255,255);
-                      
-           $filename = WWW_ROOT.'/app/assets/arquivos/profile/'.$file->name;
-           $resize->saveToFile($filename);
-           
-           chmod($filename,0777);
-           }  
+                $file = UploadFile::load($model, 'file');
 
-           $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
-           
-                      
-           if($model->save())
-              $this->Json([
-            'class'=>'sucess',
-            'msg'=>'Cadastrado com Sucesso',            
-         ]);
-           else
-              $this->Json([
-            'class'=>'warning',
-            'msg'=>'Erro para cadastrar',            
-         ]);
+                if (!empty($file)) {
+
+                    $widimage = WideImage::load($file->tmpName);
+
+                    $model->file = $file->name;
+
+                    $resize = $widimage->resize(255, 255);
+
+                    $filename = WWW_ROOT . '/app/assets/arquivos/profile/' . $file->name;
+                    $resize->saveToFile($filename);
+
+                    chmod($filename, 0777);
+                }
+
+                $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
+
+
+                if ($model->save()){
+                    $this->Json([
+                        'class' => 'sucess',
+                        'msg' => 'Cadastrado com Sucesso',
+                    ]);
+                    
+                }else
+                    $this->Json([
+                        'class' => 'warning',
+                        'msg' => 'Erro para cadastrar',
+                    ]);
+            } else
+                return $this->render('cadastro', ['model' => $model]);
+        }else{
+            $this->Json([
+                        'class' => 'warning',
+                        'msg' => 'Usuario ja cadastrado',
+                    ]);
             
-        }else        
-            return $this->render('cadastro',['model'=> $model]); 
+        }
+        
     }
 
     public function actionLogaout() {

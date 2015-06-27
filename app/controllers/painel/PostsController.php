@@ -31,7 +31,7 @@ class PostsController extends \core\app\Controller {
         
         if(\Kanda::$post->post($model) && $model->save()){
             
-            return $this->createUrl("post") ;
+            $this->redirect("post") ;
             
         }else{
             echo 'erro para cadastrar'; 

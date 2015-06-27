@@ -177,7 +177,9 @@ class Controller extends Url {
         if (file_exists($content)) {
             $this->loadView($content, $param);
         } else {
+            
             die("View <i style='color:blue;'>$content</i> not fond!");
+            
         }
     }
 

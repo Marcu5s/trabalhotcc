@@ -47,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Daily Virtual</a>
+                <a class="navbar-brand page-scroll" href="/">Daily Virtual</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -57,10 +57,10 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#cadastrar">Cadastrar</a>
+                        <a class="page-scroll" href="/#cadastrar">Cadastrar</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#entrar">Entrar</a>
+                        <a class="page-scroll" href="/#entrar">Entrar</a>
                     </li>
                    
                 </ul>
@@ -69,6 +69,17 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+<header>
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in">Bem-vindo ao Daily Virtual, seu novo modelo de diário, inovado, dinâmico e melhor, do seu jeito.
+Aqui você pode escrever suas mensagens pessoais, armazená-las, personaliza-las e muito mais.</div>
+           
+
+            <a href="#entrar" class="page-scroll btn btn-xl">Entrar</a>
+        </div>
+    </div>
+</header>
 
    <?php 
     echo $content;

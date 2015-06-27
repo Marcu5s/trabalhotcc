@@ -25,16 +25,6 @@ use \core\widgets\FormWidget;
 
 
 <!-- Header -->
-<header>
-    <div class="container">
-        <div class="intro-text">
-            <div class="intro-lead-in"> </div>
-            <div class="intro-heading"> </div>
-
-            <a href="#entrar" class="page-scroll btn btn-xl">Entrar</a>
-        </div>
-    </div>
-</header>
 
 <!-- Services Section -->
 <?php
@@ -190,7 +180,20 @@ $this->title = "Daily Virtual || Bem Vindo"
 
                     function Scripts() {
 
-                        return "var Class = data.class; setTimeout(function(){ $('.checkbox').html(''); if(Class == 'success'){  location.href=data.page;  };  },3000); if(Class ==='success'){  $('.avatar').css({'background-image':'url('+data.file+')'});  $('.checkbox').html(data.msg); }; if(Class ==='warning' ){ $('.checkbox').html(data.msg); }  ";
+                        return "var Class = data.class;"
+                        . " setTimeout(function(){ "
+                            . "$('.checkbox').html(''); "
+                            . "if(Class == 'success'){  "
+                                . "location.href=data.page;  "
+                            . "};  "
+                        . "},3000); "
+                            . "if(Class ==='success'){  "
+                                . "$('.avatar').css({'background-image':'url('+data.file+')'});  "
+                                . "$('.checkbox').html(data.msg); "
+                            . "}; "
+                            . "if(Class ==='warning' ){ "
+                                . "$('.checkbox').html(data.msg); "
+                            . "}  ";
                     }
 
                     $form = FormWidget::widget($model, [
@@ -200,7 +203,7 @@ $this->title = "Daily Virtual || Bem Vindo"
                                     'type' => 'POST',
                                     'dataType' => 'json',
                                     'success' => function($data) {
-                                        return Script();
+                                        return Scripts();
                                     },
                                     'error' => function($data) {
                                         
@@ -232,6 +235,8 @@ $this->title = "Daily Virtual || Bem Vindo"
                         </div>
                         </br> <a  href="#cadastrar" class="btn btn-primary" ><font><font>Cadastro</font></font></a>
                         <div class="clearfix"></div>
+                        <br/>   
+                        <a href="recuperar">Recuperar Senha</a>
 
                         <hr>
                         <span class="checkbox"></span>
@@ -257,7 +262,14 @@ $this->title = "Daily Virtual || Bem Vindo"
 
             function Script() {
 
-                return " var Class = data.class; setTimeout(function(){ $('.checkbox').html(''); if(Class == 'success'){ location.href=data.page;  }; },3000); if(Class ==='success'){ $('.checkbox').html(data.msg); }; if(Class ==='warning' ){ $('.checkbox').html(data.msg); }  ";
+                return " var Class = data.class; "
+                
+                    . "if(Class ==='success'){ "
+                        . "$('.checkbox').html(data.msg);"
+                    . "}; "
+                    . "if(Class ==='warning' ){ "
+                        . "$('.checkbox').html(data.msg); "
+                    . "}  ";
             }
 
             $form = FormWidget::widget($model, [
@@ -440,15 +452,10 @@ $this->title = "Daily Virtual || Bem Vindo"
                         <span class="add-on"><i class="halflings-icon user"></i></span>
                         <input class="input-large span10" name="Usuario[login]" id="username" type="text" placeholder="informe seu login">
                     </div>
-                    <div class="clearfix">
-                    </div>
+                   
 
                     <div class="input-prepend" title="Senha">
-                        <span class="add-on">
-                            <i class="halflings-icon lock">
-
-                            </i>
-                        </span>
+                        <span class="add-on"><i class="halflings-icon lock"></i></span>
                         <input class="input-large span10" name="Usuario[senha]" id="senha" type="password" placeholder="informe sua senha">
                     </div>
                     <div class="input-prepend" title="File">
@@ -457,7 +464,7 @@ $this->title = "Daily Virtual || Bem Vindo"
                     </div>
                     <div class="clearfix"></div>
                    </br> 
-                    <button class="btn btn-primary" type="submit">Castro</button>
+                    <button class="btn btn-primary" type="submit">Cadastro</button>
                     <div class="clearfix"></div>
 
                     <hr>

@@ -58,8 +58,9 @@ class UsuariosController extends \core\app\Controller {
     }
 
     public function actionCreate() {
-
+        
         $model = new Usuario();
+       
  
         
         if (\Kanda::$post->post($model)) {

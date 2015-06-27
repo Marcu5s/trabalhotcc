@@ -39,55 +39,53 @@ class TrabalhotccController extends \core\app\Controller {
     public function actionCadastro() {
 
         $model = new Usuario();
-        
-           $login    = $model->login;
-        
+
+        $login = $model->login;
+
         $user = Usuario::find('first', ['login' => $login]);
-      
-        if ($user == $login) {
-            if (\Kanda::$post->post($model)) {
 
 
-                $file = UploadFile::load($model, 'file');
-
-                if (!empty($file)) {
-
-                    $widimage = WideImage::load($file->tmpName);
-
-                    $model->file = $file->name;
-
-                    $resize = $widimage->resize(255, 255);
-
-                    $filename = WWW_ROOT . '/app/assets/arquivos/profile/' . $file->name;
-                    $resize->saveToFile($filename);
-
-                    chmod($filename, 0777);
-                }
-
-                $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
+        if (\Kanda::$post->post($model)) {
 
 
-                if ($model->save()){
+            $file = UploadFile::load($model, 'file');
+
+            if (!empty($file)) {
+
+                $widimage = WideImage::load($file->tmpName);
+
+                $model->file = $file->name;
+
+                $resize = $widimage->resize(255, 255);
+
+                $filename = WWW_ROOT . '/app/assets/arquivos/profile/' . $file->name;
+                $resize->saveToFile($filename);
+
+                chmod($filename, 0777);
+            }
+
+            $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
+            if ($user) {
+                $this->Json([
+                    'class' => 'warning',
+                    'msg' => 'Usuario ja cadastrado',
+                ]);
+            } else {
+
+                if ($model->save()) {
                     $this->Json([
                         'class' => 'sucess',
                         'msg' => 'Cadastrado com Sucesso',
                     ]);
-                    
-                }else
+                } else{
                     $this->Json([
                         'class' => 'warning',
                         'msg' => 'Erro para cadastrar',
                     ]);
-            } else
-                return $this->render('cadastro', ['model' => $model]);
-        }else{
-            $this->Json([
-                        'class' => 'warning',
-                        'msg' => 'Usuario ja cadastrado',
-                    ]);
-            
-        }
-        
+                }
+            }
+        } else
+            return $this->render('cadastro', ['model' => $model]);
     }
 
     public function actionLogaout() {

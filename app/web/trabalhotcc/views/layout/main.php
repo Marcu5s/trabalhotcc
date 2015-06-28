@@ -73,7 +73,7 @@
 <div class="intro-text">
             <div class="intro-lead-in">Bem-vindo ao Daily Virtual, seu novo modelo de diário, inovado, dinâmico e melhor, do seu jeito.
 Aqui você pode escrever suas mensagens pessoais, armazená-las, personaliza-las e muito mais.</div>
-            
+            <a href="#entrar" class="page-scroll btn btn-xl">Bem Vindo</a>
         </div>
 </header>
     <div class="container">

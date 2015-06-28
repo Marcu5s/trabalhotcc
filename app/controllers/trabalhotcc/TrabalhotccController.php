@@ -37,54 +37,45 @@ class TrabalhotccController extends \core\app\Controller {
     }
 
     public function actionCadastro() {
-
         $model = new Usuario();
-
         $login = $model->login;
-
         $user = Usuario::find('first', ['login' => $login]);
-
-
         if (\Kanda::$post->post($model)) {
+            $login = $model->login;
+            $user = Usuario::find('first', ['login' => $login]);
+            /*
+             * $file = UploadFile::load($model, 'file');
 
-             $login = $model->login;
+              if (!empty($file)) {
 
-        $user = Usuario::find('first', ['login' => $login]);
-            
-/*
- * $file = UploadFile::load($model, 'file');
+              $widimage = WideImage::load($file->tmpName);
 
-            if (!empty($file)) {
+              $model->file = $file->name;
 
-                $widimage = WideImage::load($file->tmpName);
+              $resize = $widimage->resize(255, 255);
 
-                $model->file = $file->name;
+              $filename = WWW_ROOT . '/app/assets/arquivos/profile/' . $file->name;
+              $resize->saveToFile($filename);
 
-                $resize = $widimage->resize(255, 255);
+              chmod($filename, 0777);
+              }
 
-                $filename = WWW_ROOT . '/app/assets/arquivos/profile/' . $file->name;
-                $resize->saveToFile($filename);
-
-                chmod($filename, 0777);
-            }
-
- */
-            
+             */
             $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
-            if (!$user) {
 
+            if (!$user) {
                 if ($model->save()) {
                     $this->Json([
                         'class' => 'sucess',
                         'msg' => 'Cadastrado com Sucesso',
                     ]);
-                } else{
+                } else {
                     $this->Json([
                         'class' => 'warning',
                         'msg' => 'Erro para cadastrar',
                     ]);
                 }
-            }else{
+            } else {
                 $this->Json([
                     'class' => 'warning',
                     'msg' => 'Usuario ja cadastrado',

@@ -47,8 +47,12 @@ class TrabalhotccController extends \core\app\Controller {
 
         if (\Kanda::$post->post($model)) {
 
+             $login = $model->login;
 
-            $file = UploadFile::load($model, 'file');
+        $user = Usuario::find('first', ['login' => $login]);
+            
+/*
+ * $file = UploadFile::load($model, 'file');
 
             if (!empty($file)) {
 
@@ -64,13 +68,10 @@ class TrabalhotccController extends \core\app\Controller {
                 chmod($filename, 0777);
             }
 
+ */
+            
             $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
-            if ($user) {
-                $this->Json([
-                    'class' => 'warning',
-                    'msg' => 'Usuario ja cadastrado',
-                ]);
-            } else {
+            if (!$user) {
 
                 if ($model->save()) {
                     $this->Json([
@@ -83,6 +84,11 @@ class TrabalhotccController extends \core\app\Controller {
                         'msg' => 'Erro para cadastrar',
                     ]);
                 }
+            }else{
+                $this->Json([
+                    'class' => 'warning',
+                    'msg' => 'Usuario ja cadastrado',
+                ]);
             }
         } else
             return $this->render('cadastro', ['model' => $model]);

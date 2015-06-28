@@ -75,10 +75,7 @@ use \core\widgets\FormWidget;
                         <span class="add-on"><i class="halflings-icon lock"></i></span>
                         <input class="input-large span10" name="Usuario[senha]" id="senha" type="password" placeholder="informe sua senha">
                     </div>
-                    <div class="input-prepend" title="File">
-                        <span class="add-on"><i class="halflings-icon user"></i></span>
-                        <input class="input-large span10" name="Usuario[file]" id="username" type="file" placeholder="informe seu login">
-                    </div>
+                   
                     <div class="clearfix"></div>
                 </br> 
                 <button class="btn btn-primary" type="submit">Cadastro</button>

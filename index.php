@@ -2,7 +2,7 @@
   define('WWW_ROOT',dirname(__FILE__));
   define('DS',DIRECTORY_SEPARATOR);
  
-   ini_set('error_reporting', E_ALL);
+    ini_set('display_errors', 1);
   
   $config= WWW_ROOT.'/app/config/main.php';
   

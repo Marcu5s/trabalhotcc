@@ -70,22 +70,19 @@
         <!-- /.container-fluid -->
     </nav>
 <header>
-    <div class="container">
-        <div class="intro-text">
+<div class="intro-text">
             <div class="intro-lead-in">Bem-vindo ao Daily Virtual, seu novo modelo de diário, inovado, dinâmico e melhor, do seu jeito.
 Aqui você pode escrever suas mensagens pessoais, armazená-las, personaliza-las e muito mais.</div>
-           
-
-            <a href="#entrar" class="page-scroll btn btn-xl">Entrar</a>
+            
         </div>
-    </div>
 </header>
-
-   <?php 
-    echo $content;
+    <div class="container">
+    <?php 
+        echo $content;
     ?>
-
-    <footer>
+    </div>
+ 
+   <footer>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -111,7 +108,7 @@ Aqui você pode escrever suas mensagens pessoais, armazená-las, personaliza-las
                 </div>
             </div>
         </div>
-    </footer>
+   </footer>
 
     <!-- Portfolio Modals -->
     <!-- Use the modals below to showcase details about your portfolio projects! -->
@@ -141,28 +138,3 @@ Aqui você pode escrever suas mensagens pessoais, armazená-las, personaliza-las
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

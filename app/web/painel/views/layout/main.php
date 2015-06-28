@@ -77,7 +77,9 @@ $nome = Kanda::$app->session->getSession()->nome;
                                     </li>
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
-                                        
+                                        <div class="pull-left">
+                                            <a href="<?php echo $this->createUrl('painel/perfil')?>" class="btn btn-default btn-flat">Perfil</a>
+                                        </div>
                                         <div class="pull-right">
                                             <a href="<?php echo $this->createUrl('painel/logaout')?>" class="btn btn-default btn-flat">Sair</a>
                                         </div>

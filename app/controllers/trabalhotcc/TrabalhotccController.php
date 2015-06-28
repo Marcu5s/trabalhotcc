@@ -11,8 +11,6 @@ namespace app\controllers\trabalhotcc;
 
 use app\models\painel\Usuario;
 use core\helps\Session;
-use core\helps\UploadFile;
-use core\vendor\wideImage\WideImage;
 
 class TrabalhotccController extends \core\app\Controller {
 
@@ -38,29 +36,18 @@ class TrabalhotccController extends \core\app\Controller {
 
     public function actionCadastro() {
         $model = new Usuario();
+        ///Aqui não tem como pegar o valor do $model->login
         $login = $model->login;
         $user = Usuario::find('first', ['login' => $login]);
+
         if (\Kanda::$post->post($model)) {
+
+            //Manter essa daqui! Está criando o mesmo encima
+            //Nesse caso está substituindo as variaveis $login,$user
+
             $login = $model->login;
             $user = Usuario::find('first', ['login' => $login]);
-            /*
-             * $file = UploadFile::load($model, 'file');
-
-              if (!empty($file)) {
-
-              $widimage = WideImage::load($file->tmpName);
-
-              $model->file = $file->name;
-
-              $resize = $widimage->resize(255, 255);
-
-              $filename = WWW_ROOT . '/app/assets/arquivos/profile/' . $file->name;
-              $resize->saveToFile($filename);
-
-              chmod($filename, 0777);
-              }
-
-             */
+             
             $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
 
             if (!$user) {

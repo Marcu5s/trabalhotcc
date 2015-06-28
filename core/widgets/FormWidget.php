@@ -179,7 +179,7 @@ class FormWidget extends \core\app\Controller {
     public function fileFieldGroup($column, $html = []) {
 
 
-        $tag = "<input type=\"file\" id=\"$column\" name=\"" . self::$className . "[$column]\" {$this->htmlOptions($html)} class='" . self::$classFile . "'>";
+        $tag = "<input type=\"file\" {$this->htmlOptions($html)} id=\"$column\" name=\"" . self::$className . "[$column]\"  class='" . self::$classFile . "'>";
 
         if (self::$style) {
             return self::$style->grid($column, $tag, self::$labels[$column]);
@@ -187,7 +187,7 @@ class FormWidget extends \core\app\Controller {
             return '<label>' . self::$labels[$column] . ': </label>' . $tag;
     }
 
-    public function textareaFildGroup($column, $html = []) {
+    public function textareaFieldGroup($column, $html = []) {
 
         $tag = "<textarea  name=\"" . self::$className . "[$column]\" {$this->htmlOptions($html)} id=\"$column\"  class='" . self::$classTextarea . "'>" . self::$model->$column . "</textarea>";
 

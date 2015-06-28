@@ -36,6 +36,7 @@ class Usuario extends \ActiveRecord\Model {
             'nivel_id' => 'Nível',
             'confirm_senha' => 'Confirmar senha',
             'email'=>'Email',
+            'file' => 'Imagem',
              
         ];
     }

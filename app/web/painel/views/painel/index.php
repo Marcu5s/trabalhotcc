@@ -24,7 +24,7 @@ use core\helps\Url;
 
             echo $form->textFieldGroup('titulo', ['class' => 'form-control']);
 
-            echo $form->textareaFildGroup('post');
+            echo $form->textareaFieldGroup('post');
 
 
             echo $form->textFieldGroup('usuario_id', [''], 'hidden');

@@ -18,6 +18,7 @@ use \core\widgets\FormWidget;
                 
                 . "if(Class ==='success'){ "
                 . "$('.checkbox').html(data.msg);"
+                . "location.href=data.page;  "
                 . "}; "
                 . "if(Class ==='warning' ){ "
                 . "$('.checkbox').html(data.msg); "

@@ -1,36 +1,10 @@
 <?php
 
 use \core\widgets\FormWidget;
+use \core\helps\Url;
+use \core\helps\Session;
 
-/* $form = FormWidget::widget($model,[
-  //'style'=>"\backend\style\Style"
-  ]);
-
- */
-?> 
-<!--<form method="POST" action="" >
-    
-<?php
-/* echo $form->textFieldGroup('nome');
-  echo $form->textFieldGroup('email');
-  echo $form->textFieldGroup('cidade');
-  echo $form->textFieldGroup('senha',[],'password');
-
-
-
- */
 ?>
-    <input type="submit" value="enviar">
-</form>--!>
-
-
-<!-- Header -->
-
-<!-- Services Section -->
-<?php
-$this->title = "Daily Virtual || Bem Vindo"
-?>
-
 <!--///////////////////////////////////////////////////////////////////////////////////-->
 
 
@@ -38,43 +12,7 @@ $this->title = "Daily Virtual || Bem Vindo"
     <link rel="stylesheet" href="estilo.css"/>
     <div class="form-box">
 
-        <form id="form" method="post" action="" enctype="multipart/form-data" >
-
-            <?php
-
-            function Script() {
-
-                return " var Class = data.class; "
-                        . "setTimeout(function(){ "
-                        . "$('.checkbox').html(''); "
-                        . "if(Class == 'success'){ "
-                        . "location.href=data.page;  "
-                        . "}; "
-                        . "},3000); "
-                        . "if(Class ==='success'){ "
-                        . "$('.checkbox').html(data.msg);"
-                        . "}; "
-                        . "if(Class ==='warning' ){ "
-                        . "$('.checkbox').html(data.msg); "
-                        . "}  ";
-            }
-
-            $form = FormWidget::widget($model, [
-                        'id' => 'form',
-                        'ajax' => [
-                            'url' => $this->createUrl('cadastro'),
-                            'type' => 'POST',
-                            'dataType' => 'json',
-                            'success' => function($data) {
-                                return Script();
-                            },
-                            'error' => function($data) {
-                                
-                            },
-                        ],
-            ]);
-            ?>
-
+        <form id="form" method="post" action="<?php echo Url::base('senha/'.Session::getSession()->key); ?>" enctype="multipart/form-data" >
             <div class="login-container">
                 <div id="output"></div>
                 <style>

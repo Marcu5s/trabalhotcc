@@ -9,6 +9,7 @@
 
 namespace app\controllers\trabalhotcc;
 
+use app\models\painel\Recupera_Senha;
 use app\models\painel\Usuario;
 use core\helps\Session;
 
@@ -26,13 +27,50 @@ class TrabalhotccController extends \core\app\Controller {
 
     public function actionCodigo() {
 
-        return $this->render('codigo', ['model' => new Usuario()]);
+        $model = new Usuario();
+        $rec = new Recupera_Senha();
+        if (\Kanda::$post->post($model)) {
+
+            $data = Usuario::find('first', ['email' => $model->email]);
+
+            $rec->key = md5($data->id);
+
+            $rec->usuario_id = $data->id;
+
+            $rec->save();
+
+
+            Session::setSession([
+                'key' => $rec->key,
+                'id_key' => $data->id,
+            ]);
+            $this->render('senha', ['model' => $model]);
+            exit;
+        }
+
+
+        return $this->render('codigo', ['model' => $model]);
     }
 
-    public function actionSenha() {
+    public function actionSenha($key) {
+        $model = new Usuario();
+        if (\Kanda::$post->post($model)) {
 
-        return $this->render('senha', ['model' => new Usuario()]);
-    }
+            if ($key == Session::getSession()->key) {
+                $user = Usuario::find(Session::getSession()->id_key);
+                $user->senha = password_hash($model->senha, PASSWORD_DEFAULT);
+                ;
+
+                $user->save();
+                Session::clear();
+
+                $this->redirect('index', ['#entrar' => '']);
+            }
+        }else{
+        return $this->render('senha', ['model' => $model]);
+        
+        }
+        }
 
     public function actionCadastro() {
         $model = new Usuario();
@@ -47,14 +85,28 @@ class TrabalhotccController extends \core\app\Controller {
 
             $login = $model->login;
             $user = Usuario::find('first', ['login' => $login]);
-             
+
             $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
 
-            if (!$user) {
+            if (empty($user)) {
                 if ($model->save()) {
+                    
+                    $name = $model->nome.'-'.$model->id;
+                    
+                    static::fileUpload($name);
+                    
+                    Session::setSession([
+                        'nome' => $model->nome,
+                        'login' => $model->login,
+                        'id' => $model->id,
+                        'file' => '/painel',
+                        'email' => $model->email,
+                        'photo' => $name,
+                    ]);
                     $this->Json([
-                        'class' => 'sucess',
+                        'class' => 'success',
                         'msg' => 'Cadastrado com Sucesso',
+                        'page'=> 'painel'
                     ]);
                 } else {
                     $this->Json([
@@ -76,6 +128,13 @@ class TrabalhotccController extends \core\app\Controller {
 
         session_destroy();
         return header('Location:' . $this->createUrl('painel'));
+    }
+
+    static function fileUpload($name) {
+        $file = WWW_ROOT . '/app/assets/defaultuser.jpg';
+        $filename = WWW_ROOT . '/app/assets/arquivos/profile/' . $name . '.jpg';
+
+        copy($file, $filename);
     }
 
 }

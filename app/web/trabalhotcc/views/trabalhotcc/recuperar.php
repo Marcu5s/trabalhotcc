@@ -38,9 +38,9 @@ $this->title = "Daily Virtual || Bem Vindo"
     <link rel="stylesheet" href="estilo.css"/>
     <div class="form-box">
 
-        <form id="form" method="post" action="" enctype="multipart/form-data" >
+        <form id="form" method="post" action="Codigo" enctype="multipart/form-data" >
 
-            <?php
+            <?php/*
 
             function Script() {
 
@@ -62,7 +62,7 @@ $this->title = "Daily Virtual || Bem Vindo"
             $form = FormWidget::widget($model, [
                         'id' => 'form',
                         'ajax' => [
-                            'url' => $this->createUrl('cadastro'),
+                            'url' => 
                             'type' => 'POST',
                             'dataType' => 'json',
                             'success' => function($data) {
@@ -73,7 +73,7 @@ $this->title = "Daily Virtual || Bem Vindo"
                             },
                         ],
             ]);
-            ?>
+            */?>
 
             <div class="login-container">
                 <div id="output"></div>

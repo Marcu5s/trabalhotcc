@@ -77,7 +77,9 @@ $nome = Kanda::$app->session->getSession()->nome;
                                     </li>
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
-                                        
+                                        <div class="pull-left">
+                                            <a href="<?php echo $this->createUrl('painel/perfil')?>" class="btn btn-default btn-flat">Perfil</a>
+                                        </div>
                                         <div class="pull-right">
                                             <a href="<?php echo $this->createUrl('painel/logaout')?>" class="btn btn-default btn-flat">Sair</a>
                                         </div>
@@ -194,10 +196,7 @@ $nome = Kanda::$app->session->getSession()->nome;
         <script src='<?php echo $this->assets($theme) ?>plugins/fastclick/fastclick.min.js'></script>
         <!-- AdminLTE App -->
         <script src="<?php echo $this->assets($theme) ?>dist/js/app.min.js" type="text/javascript"></script>
-
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="<?php echo $this->assets($theme) ?>dist/js/pages/dashboard.js" type="text/javascript"></script>
-
+ 
         <!-- AdminLTE for demo purposes -->
         <script src="<?php echo $this->assets($theme) ?>dist/js/demo.js" type="text/javascript"></script>
      

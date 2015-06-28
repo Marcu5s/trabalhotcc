@@ -11,26 +11,19 @@ namespace app\help;
 
 class Style {
 
-    public $classInput = 'input-xlarge focused';
-    public $classFile = 'input-file uniform_on';
-    public $classTextarea = 'form-control cleditor';
+    public $classInput = 'form-control';
+    public $classFile = 'form-control';
+    public $classTextarea = 'form-control';
     public $classSelect = 'form-control';
     public $classTable = '';
 
     public function grid($column, $content, $label) {
 
-
-        return "<div class='control-group'>
-        <label for='$column' class='control-label'>$label</label>
-        <div class=\"controls\">
-								 $content
-		</div>
-
-        </div>";         
-    }
-
-    public function table() {
-        
+       return "<div class='form-group'>
+                      <label for='$column'>$label</label>
+                       $content
+                    </div>";
+   
     }
 
 }

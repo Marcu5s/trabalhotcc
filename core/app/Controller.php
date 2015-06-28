@@ -463,6 +463,10 @@ class Controller extends Url {
             $server_name = $_SERVER['SERVER_NAME'] . '/' . $serName[1];
         }
 
+        if(php_sapi_name() === 'cli-server')
+            return  self::$home =  $protocolo . '://'.$_SERVER['HTTP_HOST'];
+
+
         self::$home = $protocolo . '://' . $server_name . ALIAS;
 
         return self::$home;

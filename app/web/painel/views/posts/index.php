@@ -34,10 +34,15 @@ $model = Post::all(
                 <!-- /.timeline-label -->
                 <!-- timeline item -->
                 <?php
+
+                 $date = date('d',strtotime($data->criacao)); 
+
                  $model = Post::all(
                   [ 'conditions'=>
                     [
-                      "date_format(criacao,'%d')= '".date('d',strtotime($data->criacao))."' "
+                     
+                      " usuario_id=$usuario_id and date_format(criacao,'%d')='$date' "
+
                     ]
                   ]);
 

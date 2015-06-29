@@ -40,11 +40,13 @@ class TrabalhotccController extends \core\app\Controller {
             $rec->save();
 
 
+            static::sendEmail();
+
             Session::setSession([
                 'key' => $rec->key,
                 'id_key' => $data->id,
             ]);
-            $this->render('senha', ['model' => $model]);
+            $this->render('codigo', ['model' => $model]);
             exit;
         }
 
@@ -66,22 +68,21 @@ class TrabalhotccController extends \core\app\Controller {
 
                 $this->redirect('index', ['#entrar' => '']);
             }
-        }else{
-        return $this->render('senha', ['model' => $model]);
-        
+        } else {
+            return $this->render('senha', ['model' => $model]);
         }
-        }
+    }
 
     public function actionCadastro() {
         $model = new Usuario();
-        ///Aqui não tem como pegar o valor do $model->login
+///Aqui não tem como pegar o valor do $model->login
         $login = $model->login;
         $user = Usuario::find('first', ['login' => $login]);
 
         if (\Kanda::$post->post($model)) {
 
-            //Manter essa daqui! Está criando o mesmo encima
-            //Nesse caso está substituindo as variaveis $login,$user
+//Manter essa daqui! Está criando o mesmo encima
+//Nesse caso está substituindo as variaveis $login,$user
 
             $login = $model->login;
             $user = Usuario::find('first', ['login' => $login]);
@@ -90,11 +91,11 @@ class TrabalhotccController extends \core\app\Controller {
 
             if (empty($user)) {
                 if ($model->save()) {
-                    
-                    $name = $model->nome.'-'.$model->id;
-                    
+
+                    $name = $model->nome . '-' . $model->id;
+
                     static::fileUpload($name);
-                    
+
                     Session::setSession([
                         'nome' => $model->nome,
                         'login' => $model->login,
@@ -106,7 +107,7 @@ class TrabalhotccController extends \core\app\Controller {
                     $this->Json([
                         'class' => 'success',
                         'msg' => 'Cadastrado com Sucesso',
-                        'page'=> 'painel'
+                        'page' => 'painel'
                     ]);
                 } else {
                     $this->Json([
@@ -135,6 +136,40 @@ class TrabalhotccController extends \core\app\Controller {
         $filename = WWW_ROOT . '/app/assets/arquivos/profile/' . $name . '.jpg';
 
         copy($file, $filename);
+    }
+
+    static function sendEmail() {
+       $model = new Usuario();
+       $rec = new Recupera_Senha();
+       
+       $data = Usuario::find('first', ['email' => $model->email]);
+       
+       
+       
+       
+        $nome = $data->nome;
+        $email = $data->email;
+        
+        $jPa = md5($data->id);
+//usuário que irá receber os dados 
+        $destinatario = $email;
+
+        $assunto = "Recuperação de Senha";
+        $assunto = '=?UTF-8?B?' . base64_encode($assunto) . '?=';
+
+        $corpo = "Olá " . $nome . ", conforme solicitado, segue abaixo o link para alterar sua senha.\n";
+        $corpo .= "Seu login é : " . $email . "\n";
+        $corpo .= "Copie o Código : " . $jPa . "\n";
+        $corpo .="Acesse o link para alterar a sua senha .\n";
+        $corpo .= "Mensagem automática, favor não responder!!\n";
+        $corpo .= "From: PORTAL JAVA <http://www.dailyvirtual.com.br/codigo>";
+
+        $headers = "MIME-Version:1.0\n";
+        $headers .= "Content-Type: text/plain;charset = 'ISO-8859-1'\n";
+
+
+//prioridade de envio do e-mail
+        $headers .= "X-Priority:1";
     }
 
 }

@@ -126,7 +126,7 @@ class GridView extends Controller {
             ++$i;
         }
 
-        $table = "<table class='table table-bordered table-striped datatable' ><thead><tr>$theader</tr></thead> <tbody>$tr</tbody></table>";
+        $table = "<table class='{$param['classTable']}' ><thead><tr>$theader</tr></thead> <tbody>$tr</tbody></table>";
         $table .= "<script>var ConfirmDelete = function(){ };</script>";
 
         return $table;
@@ -146,7 +146,7 @@ class GridView extends Controller {
 
         $actionColumn = [
             'update' => "<a class='btn btn-info' href='" . parent::$base . "/update/$id'>
-                                <i class=\"halflings-icon white edit\"></i>
+                                editar
                             </a>",
             'delete' => "<a class='btn btn-danger' href='" . parent::$base . "/delete/$id' onclick=\" if(confirm('Deseja excluir esse item?')){return true;}else{return false;};\">
                                 <i class=\"halflings-icon white trash\"></i>

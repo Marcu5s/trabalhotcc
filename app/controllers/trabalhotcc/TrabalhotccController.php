@@ -12,6 +12,7 @@ namespace app\controllers\trabalhotcc;
 use app\models\painel\Recupera_Senha;
 use app\models\painel\Usuario;
 use core\helps\Session;
+use app\vendors\phpMail;
 
 class TrabalhotccController extends \core\app\Controller {
 
@@ -39,19 +40,17 @@ class TrabalhotccController extends \core\app\Controller {
 
             $rec->save();
 
+            TrabalhotccController::sendEmail();
 
-            static::sendEmail();
 
             Session::setSession([
                 'key' => $rec->key,
                 'id_key' => $data->id,
             ]);
-            $this->render('codigo', ['model' => $model]);
+            return $this->render('codigo', ['model' => $model]);
+
             exit;
         }
-
-
-        return $this->render('codigo', ['model' => $model]);
     }
 
     public function actionSenha($key) {
@@ -139,37 +138,44 @@ class TrabalhotccController extends \core\app\Controller {
     }
 
     static function sendEmail() {
-       $model = new Usuario();
-       $rec = new Recupera_Senha();
-       
-       $data = Usuario::find('first', ['email' => $model->email]);
-       
-       
-       
-       
-        $nome = $data->nome;
-        $email = $data->email;
-        
-        $jPa = md5($data->id);
-//usuário que irá receber os dados 
-        $destinatario = $email;
+        if (\Kanda::$post->post($model)) {
+            $data = Usuario::find('first', ['email' => $model->email]);
 
-        $assunto = "Recuperação de Senha";
-        $assunto = '=?UTF-8?B?' . base64_encode($assunto) . '?=';
+            $nome = $data->nome;
+            $email = $data->email;
 
-        $corpo = "Olá " . $nome . ", conforme solicitado, segue abaixo o link para alterar sua senha.\n";
-        $corpo .= "Seu login é : " . $email . "\n";
-        $corpo .= "Copie o Código : " . $jPa . "\n";
-        $corpo .="Acesse o link para alterar a sua senha .\n";
-        $corpo .= "Mensagem automática, favor não responder!!\n";
-        $corpo .= "From: PORTAL JAVA <http://www.dailyvirtual.com.br/codigo>";
-
-        $headers = "MIME-Version:1.0\n";
-        $headers .= "Content-Type: text/plain;charset = 'ISO-8859-1'\n";
+            $jPa = md5($data->id);
 
 
-//prioridade de envio do e-mail
-        $headers .= "X-Priority:1";
+            require 'app\vendors\phpMail';
+
+            $mail = new \PHPMailer();
+            $mail->setLanguage('pt');
+
+            $host = 'mail.dailyvirtual.com.br';
+            $userName = 'no-reply@virtual.com.br';
+            $password = '12345';
+            $port = '587';
+            $segure = false;
+
+            $from = $userName;
+            $fromName = "Daily Virtual";
+
+            $mail->addAddress($email, $nome);
+
+            $mail->isHTML(true);
+            $mail->CharSet = 'utf8';
+            $mail->WordWrap = 70;
+
+            $mail->Subject = 'Alteração de senha';
+            $mail->Body = 'Utilize o codigo abaixo para alterar a senha de acesso <br/>Codigo: ' . $jPa . ' ';
+
+            $send = $mail->send();
+            if ($send) {
+                echo 'Funcinou';
+            } else
+                echo 'nao funcionou';
+        }
     }
 
 }

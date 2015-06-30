@@ -30,6 +30,8 @@ class TrabalhotccController extends \core\app\Controller {
 
         $model = new Usuario();
         $rec = new Recupera_Senha();
+        static::phpMail();
+
         if (\Kanda::$post->post($model)) {
 
             $data = Usuario::find('first', ['email' => $model->email]);
@@ -40,7 +42,6 @@ class TrabalhotccController extends \core\app\Controller {
 
             $rec->save();
 
-            TrabalhotccController::sendEmail();
 
 
             Session::setSession([
@@ -74,44 +75,45 @@ class TrabalhotccController extends \core\app\Controller {
 
     public function actionCadastro() {
         $model = new Usuario();
-///Aqui não tem como pegar o valor do $model->login
-        $login = $model->login;
-        $user = Usuario::find('first', ['login' => $login]);
-
         if (\Kanda::$post->post($model)) {
-
-//Manter essa daqui! Está criando o mesmo encima
-//Nesse caso está substituindo as variaveis $login,$user
 
             $login = $model->login;
             $user = Usuario::find('first', ['login' => $login]);
+            $email = Usuario::find('first', ['email' => $email]);
 
             $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
 
             if (empty($user)) {
-                if ($model->save()) {
+                if (empty($email)) {
+                    if ($model->save()) {
 
-                    $name = $model->nome . '-' . $model->id;
+                        $name = $model->nome . '-' . $model->id;
 
-                    static::fileUpload($name);
+                        static::fileUpload($name);
 
-                    Session::setSession([
-                        'nome' => $model->nome,
-                        'login' => $model->login,
-                        'id' => $model->id,
-                        'file' => '/painel',
-                        'email' => $model->email,
-                        'photo' => $name,
-                    ]);
-                    $this->Json([
-                        'class' => 'success',
-                        'msg' => 'Cadastrado com Sucesso',
-                        'page' => 'painel'
-                    ]);
+                        Session::setSession([
+                            'nome' => $model->nome,
+                            'login' => $model->login,
+                            'id' => $model->id,
+                            'file' => '/painel',
+                            'email' => $model->email,
+                            'photo' => $name,
+                        ]);
+                        $this->Json([
+                            'class' => 'success',
+                            'msg' => 'Cadastrado com Sucesso',
+                            'page' => 'painel'
+                        ]);
+                    } else {
+                        $this->Json([
+                            'class' => 'warning',
+                            'msg' => 'Erro para cadastrar',
+                        ]);
+                    }
                 } else {
                     $this->Json([
                         'class' => 'warning',
-                        'msg' => 'Erro para cadastrar',
+                        'msg' => 'Email ja cadastrado',
                     ]);
                 }
             } else {
@@ -137,23 +139,28 @@ class TrabalhotccController extends \core\app\Controller {
         copy($file, $filename);
     }
 
-    static function sendEmail() {
-        if (\Kanda::$post->post($model)) {
-            $data = Usuario::find('first', ['email' => $model->email]);
+    static function phpMail() {
 
-            $nome = $data->nome;
-            $email = $data->email;
+
+        $model = new Usuario();
+        $data = Usuario::find('first', ['email' => $model->email]);
+        if (\Kanda::$post->post($model)) {
+
+           include "app/vendors/phpMail/class.phpmailer.php";
+           exit; 
+           $nome = $data->nome;
+
+            print_r($email);
 
             $jPa = md5($data->id);
 
 
-            require 'app\vendors\phpMail';
 
-            $mail = new \PHPMailer();
+            $mail = new PHPMailer();
             $mail->setLanguage('pt');
 
             $host = 'mail.dailyvirtual.com.br';
-            $userName = 'no-reply@virtual.com.br';
+            $userName = 'no-reply@dailyvirtual.com.br';
             $password = '12345';
             $port = '587';
             $segure = false;
@@ -161,7 +168,7 @@ class TrabalhotccController extends \core\app\Controller {
             $from = $userName;
             $fromName = "Daily Virtual";
 
-            $mail->addAddress($email, $nome);
+            $mail->addAddress("luan.cesar.sn@gmail.com", "$nome");
 
             $mail->isHTML(true);
             $mail->CharSet = 'utf8';
@@ -169,7 +176,7 @@ class TrabalhotccController extends \core\app\Controller {
 
             $mail->Subject = 'Alteração de senha';
             $mail->Body = 'Utilize o codigo abaixo para alterar a senha de acesso <br/>Codigo: ' . $jPa . ' ';
-
+            $mail->send();
             $send = $mail->send();
             if ($send) {
                 echo 'Funcinou';

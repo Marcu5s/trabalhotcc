@@ -9,19 +9,20 @@ namespace app\controllers\painel;
 
 use app\models\painel\Usuario;
 use app\models\painel\Nivel;
- 
+
 use app\help\User;
+use core\helps\Session;
 
 class UsuariosController extends \core\app\Controller {
 
     public function behaviors() {
         return [
-            'getClass' => User::rule(),
+        'getClass' => User::rule(),
         ];
     }
 
     public function actionIndex() {
- 
+
         return $this->render('index', ['dataProvider' => Usuario::dataProvider()]);
     }
 
@@ -37,69 +38,65 @@ class UsuariosController extends \core\app\Controller {
 
         $model = $this->findModel($id);
 
+        $senha = $model->senha;
+
         if (\Kanda::$post->post($model)) {
-            $_POST['id'] = $id;
-            if ($_POST['senha'] <> 123 && $_POST['senha'] == $_POST['confirm_senha']) {
 
-                $_POST['senha'] = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-
-                unset($_POST['confirm_senha']);
-            } else
-                unset($_POST['senha']);
-
-            $model->update_attributes($_POST);
-
-            \Kanda::$app->session->setflash('update', 'Alterado com sucesso');
+            if ($model->senha <> 123) 
+                $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
+            else
+                $model->senha = $senha;
+            
+            if($model->save()){
+                Session::setSession([
+                    'message' => 'Alterado com sucesso!',
+                    'class'   => 'alert-success',
+                    ]);
+            }else{
+                Session::setSession([
+                    'message' => 'Erro para alterar',
+                    'class'   => 'alert-danger',
+                    ]);
+            }
 
             return $this->redirect('update', ['id' => $id]);
         } else {
-            return $this->render('form', ['model' => $model,'nivel'=>new Nivel()]);
+            return $this->render('form', ['model' => $model]);
         }
     }
 
     public function actionCreate() {
 
         $model = new Usuario();
- 
+
         
         if (\Kanda::$post->post($model)) {
-            
-            if ($_POST['senha'] <> 123 && $_POST['senha'] == $_POST['confirm_senha']) {
-                             
-                
-                $_POST['senha'] = password_hash($_POST['senha'], PASSWORD_DEFAULT);
 
-                unset($_POST['confirm_senha']);
-            } else {
-                    \Kanda::$app->session->setflash('update', 'Senha inválida', 'warning');
 
-                return $this->redirect('create');
-            }
+           $model->senha = password_hash($model->senha, PASSWORD_DEFAULT);
 
-            $model = new Usuario($_POST);
+           $model->save();
 
-            $model->save(false);
-            
-            \Kanda::$app->session->setflash('create', 'Cadastrado com sucesso');
-             
+           \Kanda::$app->session->setflash('create', 'Cadastrado com sucesso');
+
+           return $this->redirect();
+
+       } else {
+
+        return $this->render('form', ['model' => $model]);
+    }
+}
+
+public function actionDelete($id) {
+
+    if (isset($id) && !empty($id)) {
+        $model = $this->findModel($id);
+        if ($model->delete()) {
+            \Kanda::$app->session->setflash('delete', 'Excluído com sucesso');
             return $this->redirect();
-            
-        } else {
-             
-            return $this->render('form', ['model' => $model,'nivel'=>new Nivel()]);
         }
     }
-
-    public function actionDelete($id) {
-
-        if (isset($id) && !empty($id)) {
-            $model = $this->findModel($id);
-            if ($model->delete()) {
-                \Kanda::$app->session->setflash('delete', 'Excluído com sucesso');
-                return $this->redirect();
-            }
-        }
-    }
+}
 
     /**
      * 

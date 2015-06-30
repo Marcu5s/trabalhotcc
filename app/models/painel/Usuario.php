@@ -44,7 +44,7 @@ class Usuario extends \ActiveRecord\Model {
     public static function dataProvider(){
      
     return array_merge(
-                       ['data'=>  self::find('all',['select'=>'login,nome,user_id,email'])],
+                       ['data'=>  self::find('all',['select'=>'login,nome,id,email'])],
                        self::attributeLabels(),['primary_key'=>  self::$primary_key, ]
             );
              

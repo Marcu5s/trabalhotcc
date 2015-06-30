@@ -6,21 +6,11 @@ use core\helps\Url;
 use core\helps\Session;
 
 ?>
-
-<style>
-  
-    .bar {
-    height: 18px;
-    background: #B0DCA2;
-}
-
-</style>
 <div class="box">
   <div class="box-header with-border">
     <h3 class="box-title"></h3>
     <div class="box-tools pull-right">
-      <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-      <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+       <a href="<?php echo Url::home('usuarios') ?>">voltar</a>
     </div>
   </div>
   <div class="box-body">
@@ -59,14 +49,7 @@ use core\helps\Session;
         </form>
       </div><!-- /.tab-pane -->
       <div id="tab_2" class="tab-pane">
-
-      <?php echo $form->fileFieldGroup('file',['id'=>'fileupload']) ?>
-
-      <div id="progress">
-            <div class="bar" style="width: 0%;"></div>
-       </div>
-        <br/>
-       <div>
+      <div>
          
          <img src="<?php echo $this->createUrl().'/app/assets/arquivos/profile/'.Kanda::$app->session->getSession()->photo ?>"  />
 
@@ -81,31 +64,3 @@ use core\helps\Session;
 </div>
 <?php
    Session::clear('class');
-?>
-<script src="<?php echo $this->createUrl() ?>/app/vendors/fileupload/js/vendor/jquery.ui.widget.js" ></script>
-<script src="<?php echo $this->createUrl() ?>/app/vendors/fileupload/js/jquery.iframe-transport.js" ></script>
-<script src="<?php echo $this->createUrl() ?>/app/vendors/fileupload/js/jquery.fileupload.js" ></script>
-
-<script>
-
-   
-  $(function () {
-    $('#fileupload').fileupload({
-      dataType: 'json',
-      url: '<?php echo Url::base('upload') ?>',
-      progressall: function (e, data) {
-        var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('#progress .bar').css(
-            'width',
-            progress + '%'
-        );
-        }, 
-       done: function (e, data) {
-        $.each(data.result.files, function (index, file) {
-            $('img').attr({src:file.url});
-        });
-      },
-       
-    });
-  });
-</script>

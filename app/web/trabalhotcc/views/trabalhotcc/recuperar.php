@@ -38,43 +38,8 @@ $this->title = "Daily Virtual || Bem Vindo"
     <link rel="stylesheet" href="estilo.css"/>
     <div class="form-box">
 
-        <form id="form" method="post" action="Codigo" enctype="multipart/form-data" >
-
-            <?php/*
-
-            function Script() {
-
-                return " var Class = data.class; "
-                . "setTimeout(function(){ "
-                    . "$('.checkbox').html(''); "
-                        .  "if(Class == 'success'){ "
-                        .   "location.href=data.page;  "
-                    . "}; "
-                ."},3000); "
-                    . "if(Class ==='success'){ "
-                        . "$('.checkbox').html(data.msg);"
-                    . "}; "
-                    . "if(Class ==='warning' ){ "
-                        . "$('.checkbox').html(data.msg); "
-                    . "}  ";
-            }
-
-            $form = FormWidget::widget($model, [
-                        'id' => 'form',
-                        'ajax' => [
-                            'url' => 
-                            'type' => 'POST',
-                            'dataType' => 'json',
-                            'success' => function($data) {
-                                return Script();
-                            },
-                            'error' => function($data) {
-                                
-                            },
-                        ],
-            ]);
-            */?>
-
+        <form id="form" method="post" action="<?php echo $this->createUrl('codigo') ?>" enctype="multipart/form-data" >
+ 
             <div class="login-container">
                 <div id="output"></div>
                 <style>

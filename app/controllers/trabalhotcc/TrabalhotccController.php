@@ -18,6 +18,11 @@ class TrabalhotccController extends \core\app\Controller {
 
     public function actionIndex() {
 
+
+        $this->phpMail();
+
+
+
         return $this->render('index', ['model' => new Usuario()]);
     }
 
@@ -141,12 +146,13 @@ class TrabalhotccController extends \core\app\Controller {
 
     static function phpMail() {
 
+ 
 
         $model = new Usuario();
         $data = Usuario::find('first', ['email' => $model->email]);
         if (\Kanda::$post->post($model)) {
 
-           include "app/vendors/phpMail/class.phpmailer.php";
+           
            exit; 
            $nome = $data->nome;
 
@@ -156,7 +162,7 @@ class TrabalhotccController extends \core\app\Controller {
 
 
 
-            $mail = new PHPMailer();
+           
             $mail->setLanguage('pt');
 
             $host = 'mail.dailyvirtual.com.br';
